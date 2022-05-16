@@ -1,0 +1,5 @@
+:host {
+    --slds-c-alert-color-background: #51a251;
+    --slds-c-alert-text-color: white;
+    --slds-c-alert-text-color-active: blue;
+  }

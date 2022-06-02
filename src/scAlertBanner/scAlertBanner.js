@@ -1,20 +1,16 @@
-import { LightningElement, wire, api} from 'lwc';
+import { LightningElement, wire, track, api} from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
-import PORTAL_NAME from '@salesforce/schema/aptk_alert__Company_Alert__c.Name';
-import PORTAL_MESSAGE from '@salesforce/schema/aptk_alert__Company_Alert__c.aptk_alert__Message__c';
-import PORTAL_LINK_LABEL from '@salesforce/schema/aptk_alert__Company_Alert__c.link_label__c';
-import PORTAL_LINK from '@salesforce/schema/aptk_alert__Company_Alert__c.link__c';
+import PORTAL_TITLE from '@salesforce/schema/Support_Center_Alert__c.Alert_Title__c';
+import PORTAL_MESSAGE from '@salesforce/schema/Support_Center_Alert__c.Alert_Message__c';
 
 const FIELDS = [
-    'aptk_alert__Company_Alert__c.Name',
-    'aptk_alert__Company_Alert__c.aptk_alert__Message__c',
-    'aptk_alert__Company_Alert__c.link_label__c',
-    'aptk_alert__Company_Alert__c.link__c',
+    'Support_Center_Alert__c.Alert_Title__c',
+    'Support_Center_Alert__c.Alert_Message__c',
 
 ]
 
 export default class ScAlertBanner extends LightningElement {
-    recordId = 'aL13C0000004C9iSAE';
+    recordId = 'aL73C000000001TSAQ'; //You need to fix this and set it to query the id of the active SCA record if there's one
 
     @wire(getRecord, { 
         recordId: '$recordId',
@@ -22,19 +18,12 @@ export default class ScAlertBanner extends LightningElement {
     })
     PortalAlert;
 
-    get name (){
-        return getFieldValue(this.PortalAlert.data, PORTAL_NAME)
+    get title (){
+        return getFieldValue(this.PortalAlert.data, PORTAL_TITLE)
     }
 
     get message (){
         return getFieldValue(this.PortalAlert.data, PORTAL_MESSAGE)
     }
 
-    get link (){
-        return getFieldValue(this.PortalAlert.data, PORTAL_LINK)
-    }
-
-    get link_label (){
-        return getFieldValue(this.PortalAlert.data, PORTAL_LINK_LABEL)
-    }
 }
